@@ -19,7 +19,6 @@ const initialState: UsersState = {
   loginError: null,
 }
 
-
 export const usersSlice = createSlice({
   name: 'users',
   initialState,

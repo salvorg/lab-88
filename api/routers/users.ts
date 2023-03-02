@@ -1,7 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import User from '../models/User';
-import auth, {RequestWithUser} from '../middleware/auth';
 
 const usersRouter = express.Router();
 
@@ -9,6 +8,7 @@ usersRouter.post('/', async (req, res, next) => {
   try {
     const user = new User({
       username: req.body.username,
+      nickname: req.body.nickname,
       password: req.body.password,
     });
 

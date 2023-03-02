@@ -1,5 +1,6 @@
 export interface RegisterMutation {
   username: string;
+  nickname: string;
   password: string;
 }
 
@@ -33,4 +34,18 @@ export interface LoginMutation {
 
 export interface GlobalError {
   error: string;
+}
+
+export interface PostMutation {
+  title: string;
+  description: string;
+  image: File | null;
+}
+
+export interface Post {
+  _id: string;
+  title: string;
+  description: string;
+  image: File | null;
+  createdAt: string;
 }

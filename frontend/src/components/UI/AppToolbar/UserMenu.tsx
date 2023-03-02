@@ -3,6 +3,7 @@ import { User } from '../../../types';
 import { Button, Menu, MenuItem } from '@mui/material';
 import { useAppDispatch } from '../../../app/hooks';
 import { logout } from '../../../features/users/usersThunks';
+import {Link} from "react-router-dom";
 
 interface Props {
   user: User;
@@ -37,8 +38,7 @@ const UserMenu: React.FC<Props> = ({user}) => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
+        <MenuItem component={Link} to="/add-new-post">Add new post</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </>
