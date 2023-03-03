@@ -28,6 +28,7 @@ commentsRouter.post('/', auth, async (req, res, next) => {
       user: user._id.toString(),
       post: req.body.post,
       comment: req.body.comment,
+      createdAt: new Date().toISOString(),
     };
 
     const comment = new Comment(commentData);

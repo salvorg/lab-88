@@ -1,4 +1,4 @@
-import {CommentType, CommentWithUser} from "../../types";
+import {CommentWithUser} from "../../types";
 import {createSlice} from "@reduxjs/toolkit";
 import {createComment, fetchComments} from "./commentsThunks";
 import {RootState} from "../../app/store";

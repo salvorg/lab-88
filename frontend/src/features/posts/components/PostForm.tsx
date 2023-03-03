@@ -5,7 +5,8 @@ import {Grid, TextField} from "@mui/material";
 import FileInput from "../../../components/UI/FileInput/FileInput";
 import {LoadingButton} from '@mui/lab';
 import {selectPostsCreating} from "../postsSlice";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
+import {selectUser} from "../../users/usersSlice";
 
 interface Props {
   onSubmit: (mutation: PostMutation) => void;
@@ -13,6 +14,7 @@ interface Props {
 
 const PostForm: React.FC<Props> = ({onSubmit}) => {
   const navigate = useNavigate();
+  const user = useAppSelector(selectUser);
   const creating = useAppSelector(selectPostsCreating);
   const [btnLoading, setBtnLoading] = useState(true);
   const [state, setState] = useState<PostMutation>({
@@ -50,6 +52,10 @@ const PostForm: React.FC<Props> = ({onSubmit}) => {
       setBtnLoading(true);
     }
   }, [state]);
+
+  if (!user) {
+    return <Navigate to="/login/"/>
+  }
 
   return (
     <form

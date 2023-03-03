@@ -1,5 +1,6 @@
-import mongoose, {Schema, Types} from 'mongoose';
+import mongoose, {HydratedDocument, Schema, Types} from 'mongoose';
 import User from './User';
+import {PostType} from '../types';
 
 const PostSchema = new Schema({
   user: {
@@ -17,12 +18,28 @@ const PostSchema = new Schema({
   },
   description: {
     type: String,
-    // validate: {
-    //   validator: async function (this: HydratedDocument<PostType>)
-    // }
+    validate: {
+      validator: async function (this: HydratedDocument<PostType>): Promise<boolean> {
+        return Boolean(this.image || this.description);
+      },
+      message: "Error 1"
+    }
   },
-  image: String,
-});
+  image: {
+    type: String,
+    validate: {
+      validator: async function (this: HydratedDocument<PostType>): Promise<boolean> {
+        return Boolean(this.description || this.image);
+      },
+      message: "Image or description required"
+    }
+  },
+  createdAt: {
+    type: Date,
+    required: true,
+  },
+}
+);
 
 const Post = mongoose.model('Post', PostSchema);
 export default Post;

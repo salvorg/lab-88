@@ -22,12 +22,14 @@ export interface PostType {
   title: string;
   description: string;
   image: string | null;
+  createdAt: string;
 }
 
 export interface CommentType {
   user: string,
   post: string,
   comment: string;
+  createdAt: string;
 }
 
 

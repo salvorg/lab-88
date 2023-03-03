@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {CommentType, CommentWithoutId, CommentWithUser} from "../../types";
+import {CommentWithoutId, CommentWithUser} from "../../types";
 import axiosApi from "../../axiosApi";
 import {RootState} from "../../app/store";
 

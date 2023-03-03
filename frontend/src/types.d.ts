@@ -70,4 +70,5 @@ export interface CommentWithUser {
   }
   postId: string;
   comment: string;
+  createdAt: string;
 }

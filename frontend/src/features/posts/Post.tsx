@@ -46,33 +46,32 @@ const Post = () => {
 
   return (
     <>
-      {loadingPost ? <CircularProgress/> : (<Grid container direction={"column"}>
-        <Grid item>
-          <h1>{post?.title}</h1>
+      {loadingPost ? <CircularProgress/> : (
+        <Grid container direction={"column"}>
+        <Grid item sx={{mb: 3}}>
+          <Typography variant="h2">{post?.title}</Typography>
+          <Typography fontSize={15} color="grey">{dateTime} by <strong>{post?.user.displayName}</strong></Typography>
         </Grid>
-        <Grid item>
-          <Typography>{dateTime} by <strong>{post?.user.displayName}</strong></Typography>
-        </Grid>
-        <Grid item sx={{mb: 2}}>
-          <Typography>{post?.description}</Typography>
+        <Grid item sx={{mb: 5}}>
+          <Typography fontSize={25}>{post?.description}</Typography>
         </Grid>
         <Divider/>
-        <Grid item>
-          <Typography variant="h5" sx={{marginTop: 3}}>Add your comment:</Typography>
+        <Grid item sx={{mb: 5}}>
+          <Typography variant="h5" color="primary.main" sx={{mt: 3}}>Add your comment:</Typography>
           {user ?
             (<CommentForm id={id} onSubmit={onFormSubmit} isLoading={creatingComment}/>)
             :
             (<h3 style={{color: "red"}}>не зарегистрированные пользователи не могу оставлять комментарии!</h3>)
           }
         </Grid>
-        <Divider/>
         <Grid item>
-          <h3>Comments:</h3>
+          <Typography variant="h5" color="primary.main">Comments:</Typography>
         </Grid>
         <Grid item container direction={"column"}>
           {loadingComments ? <CircularProgress/> : commentsForm}
         </Grid>
-      </Grid>)}
+      </Grid>
+      )}
     </>
   );
 };

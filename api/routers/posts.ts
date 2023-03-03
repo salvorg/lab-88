@@ -14,8 +14,9 @@ postsRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next)
     const postData: PostType = {
       user: user._id.toString(),
       title: req.body.title,
-      description: req.body.description,
+      description: req.body.description ? req.body.description : null,
       image: req.file ? req.file.filename : null,
+      createdAt: new Date().toISOString(),
     };
 
     const post = new Post(postData);
