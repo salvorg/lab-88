@@ -28,7 +28,7 @@ const UserSchema = new Schema<IUser, UserModel, IUserMethods>({
       message: 'This user is already registered',
     }
   },
-  nickname: {
+  displayName: {
     type: String,
     required: true,
   },

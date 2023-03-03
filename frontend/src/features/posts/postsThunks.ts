@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {Post, PostMutation} from "../../types";
+import {PostType, PostMutation} from "../../types";
 import axiosApi from "../../axiosApi";
 import {RootState} from "../../app/store";
 
@@ -28,10 +28,11 @@ export const createPost = createAsyncThunk<void, PostMutation, {state: RootState
   }
 );
 
-export const fetchProducts = createAsyncThunk<Post[]>(
+export const fetchPosts = createAsyncThunk<PostType[]>(
   'posts/fetchAll',
   async () => {
-    const response = await axiosApi.get<Post[]>('/posts');
+    const response = await axiosApi.get<PostType[]>('/posts');
+    console.log(response.data);
     return response.data;
   }
 );

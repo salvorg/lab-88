@@ -1,10 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {RootState} from "../../app/store";
-import {Post} from "../../types";
-import {createPost} from "./postsThunks";
+import {PostType} from "../../types";
+import {createPost, fetchPosts} from "./postsThunks";
 
 interface PostsState {
-  items: Post[];
+  items: PostType[];
   creating: boolean;
   fetching: boolean;
 }
@@ -28,6 +28,16 @@ export const postsSlice = createSlice({
     });
     builder.addCase(createPost.rejected, (state) => {
       state.creating = false;
+    });
+    builder.addCase(fetchPosts.pending, (state) => {
+      state.fetching = true;
+    });
+    builder.addCase(fetchPosts.fulfilled, (state, {payload: posts}) => {
+      state.fetching = false;
+      state.items = posts;
+    });
+    builder.addCase(fetchPosts.rejected, (state) => {
+      state.fetching = false;
     });
   }
 });

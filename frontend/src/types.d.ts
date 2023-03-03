@@ -1,6 +1,6 @@
 export interface RegisterMutation {
   username: string;
-  nickname: string;
+  displayName: string;
   password: string;
 }
 
@@ -42,10 +42,14 @@ export interface PostMutation {
   image: File | null;
 }
 
-export interface Post {
+export interface PostType {
   _id: string;
+  user: {
+    _id: string,
+    displayName: string,
+  };
   title: string;
   description: string;
-  image: File | null;
+  image: string | null;
   createdAt: string;
 }

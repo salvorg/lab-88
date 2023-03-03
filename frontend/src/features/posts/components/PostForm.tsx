@@ -14,16 +14,16 @@ interface Props {
 const PostForm: React.FC<Props> = ({onSubmit}) => {
   const navigate = useNavigate();
   const creating = useAppSelector(selectPostsCreating);
-  const [a, setA] = useState(true);
+  const [btnLoading, setBtnLoading] = useState(true);
   const [state, setState] = useState<PostMutation>({
     title: '',
     description: '',
     image: null,
   });
 
-  const submitFormHandler = (e: React.FormEvent) => {
+  const submitFormHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(state);
+    await onSubmit(state);
     navigate('/');
   };
 
@@ -43,11 +43,11 @@ const PostForm: React.FC<Props> = ({onSubmit}) => {
 
   useEffect(() => {
     if (state.description.length || state.image) {
-      setA(false);
+      setBtnLoading(false);
     }
 
     if (state.description.length === 0  && state.image === null) {
-      setA(true);
+      setBtnLoading(true);
     }
   }, [state]);
 
@@ -86,7 +86,7 @@ const PostForm: React.FC<Props> = ({onSubmit}) => {
         </Grid>
 
         <Grid item xs>
-          <LoadingButton disabled={a} loading={creating} type="submit" color="primary" variant="contained">Create</LoadingButton>
+          <LoadingButton disabled={btnLoading} loading={creating} type="submit" color="primary" variant="contained">Create</LoadingButton>
         </Grid>
       </Grid>
     </form>

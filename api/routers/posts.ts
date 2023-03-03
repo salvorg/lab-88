@@ -1,7 +1,7 @@
 import express from 'express';
-import auth from '../middleware/auth';
+import auth, {RequestWithUser} from '../middleware/auth';
 import {imagesUpload} from '../multer';
-import {PostType} from '../types';
+import {PostMutation, PostType} from '../types';
 import Post from '../models/Post';
 import mongoose from 'mongoose';
 
@@ -9,7 +9,10 @@ const postsRouter = express.Router();
 
 postsRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next) => {
   try {
+    const user = (req as RequestWithUser).user;
+
     const postData: PostType = {
+      user: user._id.toString(),
       title: req.body.title,
       description: req.body.description,
       image: req.file ? req.file.filename : null,
@@ -30,7 +33,7 @@ postsRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next)
 
 postsRouter.get('/', async (req, res) => {
   try {
-    const result = await Post.find();
+    const result: PostMutation[] = await Post.find().populate('user', 'displayName');
     return res.send(result);
   } catch {
     return res.sendStatus(500);
