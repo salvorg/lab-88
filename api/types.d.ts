@@ -1,4 +1,4 @@
-import {ObjectId, Schema} from 'mongoose';
+import {ObjectId} from 'mongoose';
 
 export interface IUser {
   username: string;
@@ -22,6 +22,12 @@ export interface PostType {
   title: string;
   description: string;
   image: string | null;
+}
+
+export interface CommentType {
+  user: string,
+  post: string,
+  comment: string;
 }
 
 

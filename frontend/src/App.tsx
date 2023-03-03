@@ -22,7 +22,7 @@ const App = () => {
             <Route path="/register" element={<Register/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/add-new-post" element={<NewPost/>}/>
-            <Route path="/:id" element={<Post/>}/>
+            <Route path="/post/:id" element={<Post/>}/>
             <Route path="*" element={(<h3>Спору нет, если ищешь, то всегда что-нибудь найдешь, но совсем не обязательно то, что искал.</h3>)}/>
           </Routes>
         </Container>

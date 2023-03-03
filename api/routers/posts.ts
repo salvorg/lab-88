@@ -19,8 +19,8 @@ postsRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next)
     };
 
     const post = new Post(postData);
-
     await post.save();
+
     return res.send(post);
   } catch (e) {
     if (e instanceof mongoose.Error.ValidationError) {
@@ -34,6 +34,7 @@ postsRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next)
 postsRouter.get('/', async (req, res) => {
   try {
     const result: PostMutation[] = await Post.find().populate('user', 'displayName');
+
     return res.send(result);
   } catch {
     return res.sendStatus(500);
@@ -42,7 +43,7 @@ postsRouter.get('/', async (req, res) => {
 
 postsRouter.get('/:id', async (req, res) => {
   try {
-    const result = await Post.findById(req.params.id);
+    const result = await Post.findById(req.params.id).populate('user', 'displayName');
 
     if (!result) {
       return res.sendStatus(404);

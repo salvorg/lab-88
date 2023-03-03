@@ -4,12 +4,14 @@ import { LoginMutation } from '../../types';
 import { Alert, Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectLoginError } from './usersSlice';
+import {selectLoginError, selectLoginLoading} from './usersSlice';
 import { login } from './usersThunks';
+import {LoadingButton} from "@mui/lab";
 
 const Login = () => {
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectLoginError);
+  const loginLoading = useAppSelector(selectLoginLoading);
   const navigate = useNavigate();
 
 
@@ -72,14 +74,15 @@ const Login = () => {
               />
             </Grid>
           </Grid>
-          <Button
+          <LoadingButton
+            loading={loginLoading}
             type="submit"
             fullWidth
             variant="contained"
             sx={{mt: 3, mb: 2}}
           >
             Sign In
-          </Button>
+          </LoadingButton>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link component={RouterLink} to="/register" variant="body2">

@@ -53,3 +53,21 @@ export interface PostType {
   image: string | null;
   createdAt: string;
 }
+
+export interface CommentType {
+  _id: string;
+  postId: string;
+  comment: string;
+}
+
+export type CommentWithoutId = Omit<CommentType, '_id'>;
+
+export interface CommentWithUser {
+  _id: string;
+  user: {
+    _id: string;
+    displayName: string;
+  }
+  postId: string;
+  comment: string;
+}

@@ -36,3 +36,16 @@ export const fetchPosts = createAsyncThunk<PostType[]>(
     return response.data;
   }
 );
+
+export const fetchOnePost = createAsyncThunk<PostType, string>(
+  'posts/fetchOne',
+  async (postId) => {
+    const response = await axiosApi.get<PostType | null>('/posts/' + postId);
+
+    if (response.data === null) {
+      throw new Error('Not found');
+    }
+
+    return response.data;
+  }
+);

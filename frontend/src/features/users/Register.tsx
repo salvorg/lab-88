@@ -4,12 +4,14 @@ import { RegisterMutation } from '../../types';
 import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectRegisterError } from './usersSlice';
+import {selectRegisterError, selectRegisterLoading} from './usersSlice';
 import { register } from './usersThunks';
+import {LoadingButton} from "@mui/lab";
 
 const Register = () => {
   const dispatch = useAppDispatch();
   const error = useAppSelector(selectRegisterError);
+  const registerLoading = useAppSelector(selectRegisterLoading);
   const navigate = useNavigate();
   const [state, setState] = useState<RegisterMutation>({
     username: '',
@@ -94,14 +96,15 @@ const Register = () => {
               />
             </Grid>
           </Grid>
-          <Button
+          <LoadingButton
+            loading={registerLoading}
             type="submit"
             fullWidth
             variant="contained"
             sx={{mt: 3, mb: 2}}
           >
             Sign Up
-          </Button>
+          </LoadingButton>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link component={RouterLink} to="/login" variant="body2">

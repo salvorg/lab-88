@@ -25,7 +25,7 @@ const PostItem: React.FC<Props> = ({
   image,
   createdAt,
                                    }) => {
-  const newsDateTime = dayjs(createdAt).format('DD.MM.YYYY HH:mm');
+  const dateTime = dayjs(createdAt).format('DD.MM.YYYY HH:mm');
   let cardImage = noImage;
 
   if (image) {
@@ -38,9 +38,9 @@ const PostItem: React.FC<Props> = ({
       <Card sx={{display: "flex"}}>
         <ImageCardMedia image={cardImage} title={title}/>
         <Grid>
-          <CardHeader title={newsDateTime + ' by ' + displayName}/>
+          <CardHeader title={dateTime + ' by ' + displayName}/>
           <CardActions>
-            <Typography variant="h5" component={Link} to={'/news/' + id} sx={{pl: 1}}>{title}</Typography>
+            <Typography variant="h5" component={Link} to={'/post/' + id} sx={{pl: 1}}>{title}</Typography>
           </CardActions>
         </Grid>
       </Card>
