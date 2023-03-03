@@ -7,6 +7,7 @@ export interface RegisterMutation {
 export interface User {
   _id: string;
   username: string;
+  displayName: string;
   token: string;
 }
 
@@ -52,6 +53,7 @@ export interface PostType {
   description: string;
   image: string | null;
   createdAt: string;
+  commentCount: number;
 }
 
 export interface CommentType {

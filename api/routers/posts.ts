@@ -34,9 +34,35 @@ postsRouter.post('/', auth, imagesUpload.single('image'), async (req, res, next)
 
 postsRouter.get('/', async (req, res) => {
   try {
-    const result: PostMutation[] = await Post.find().populate('user', 'displayName');
+    const result: PostMutation[] = await Post.aggregate([
+      {
+        $lookup: {
+          from: 'comments',
+          localField: '_id',
+          foreignField: 'post',
+          as: 'comments'
+        }
+      },
+      {
+        $project: {
+          user: 1,
+          title: 1,
+          description: 1,
+          image: 1,
+          createdAt: 1,
+          commentCount: { $size: '$comments' }
+        }
+      }
+    ]).exec();
+
+    await Post.populate(result, { path: 'user', select: 'displayName' });
 
     return res.send(result);
+
+
+    // const result: PostMutation[] = await Post.find().populate('user', 'displayName');
+    //
+    // return res.send(result);
   } catch {
     return res.sendStatus(500);
   }

@@ -34,30 +34,36 @@ const run = async () => {
     user: firstUser._id,
     title: "Prodam morkovku",
     description: "Ochen vkusnaya morkovka",
-    image: "fixtures/morkovka.jpg"
+    image: "fixtures/morkovka.jpg",
+    createdAt: "2023-03-03T18:01:10.724Z",
   }, {
     user: secondUser._id,
     title: "Kuplu kartoshku",
     description: "Nujna ochen vkusnaya kartoshka",
-    image: null
+    image: null,
+    createdAt: "2023-03-03T19:01:10.724Z",
   });
 
   await Comment.create({
     user: firstUser._id,
     post: post1._id,
-    comment: "Realno govoru ochen vkusnaya"
+    comment: "Realno govoru ochen vkusnaya",
+    createdAt: "2023-03-03T12:01:10.724Z",
   }, {
     user: firstUser._id,
     post: post2._id,
-    comment: "Prodam tebe, skolko vozmesh?"
+    comment: "Prodam tebe, skolko vozmesh?",
+    createdAt: "2023-03-03T17:01:10.724Z",
   }, {
     user: secondUser._id,
     post: post1._id,
-    comment: "Pokupal u tebya, ne takaya uj i vkysnaya"
+    comment: "Pokupal u tebya, ne takaya uj i vkysnaya",
+    createdAt: "2023-03-03T15:01:10.724Z",
   }, {
     user: secondUser._id,
     post: post2._id,
-    comment: "Ne vozmu, daje ne prosi"
+    comment: "Ne vozmu, daje ne prosi",
+    createdAt: "2023-03-03T14:01:10.724Z",
   });
 
   await db.close();

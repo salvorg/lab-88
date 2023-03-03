@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 
 const ImageCardMedia = styled(CardMedia)({
   width: 0,
-  paddingLeft: '26.25%',
+  paddingLeft: '12%',
 });
 
 interface Props {
@@ -16,6 +16,7 @@ interface Props {
   title: string;
   image: string | null;
   createdAt: string;
+  commentCount: number;
 }
 
 const PostItem: React.FC<Props> = ({
@@ -24,6 +25,7 @@ const PostItem: React.FC<Props> = ({
   title,
   image,
   createdAt,
+  commentCount,
                                    }) => {
   const dateTime = dayjs(createdAt).format('DD.MM.YYYY HH:mm');
   let cardImage = noImage;
@@ -39,8 +41,9 @@ const PostItem: React.FC<Props> = ({
         <ImageCardMedia image={cardImage} title={title}/>
         <Grid>
           <CardHeader title={dateTime + ' by ' + displayName}/>
-          <CardActions>
+          <CardActions sx={{display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
             <Typography variant="h5" component={Link} to={'/post/' + id} sx={{pl: 1}}>{title}</Typography>
+            <Typography component="p" sx={{pl: 1}}>comments: {commentCount}</Typography>
           </CardActions>
         </Grid>
       </Card>

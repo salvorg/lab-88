@@ -25,6 +25,7 @@ const Posts = () => {
         title={post.title}
         image={post.image}
         createdAt={post.createdAt}
+        commentCount={post.commentCount}
       />
     )).reverse())
   } else {

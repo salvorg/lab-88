@@ -22,7 +22,7 @@ const PostSchema = new Schema({
       validator: async function (this: HydratedDocument<PostType>): Promise<boolean> {
         return Boolean(this.image || this.description);
       },
-      message: "Error 1"
+      message: "Image or description required"
     }
   },
   image: {
